@@ -41,6 +41,14 @@ public class Array {
         return index;
     }
 
+    public int max(){
+        int maxValue = Integer.MIN_VALUE;
+        for(int i = 0; i < count; i++)
+            if(array[i] > maxValue)
+                maxValue = array[i];
+        return maxValue;
+    }
+
     public void print(){
         for(int i = 0; i < count; i++)
             System.out.println(array[i]);

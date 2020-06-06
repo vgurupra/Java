@@ -13,6 +13,6 @@ public class Main {
         numbers.insert(30);
         numbers.insert(40);
         numbers.removeAt(3);
-        numbers.print();
+        System.out.println(numbers.max());
     }
 }
