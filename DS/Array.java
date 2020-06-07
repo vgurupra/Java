@@ -1,5 +1,7 @@
 package com.company.DS;
 
+import java.util.ArrayList;
+
 public class Array {
     private int[] array;
     private int count;
@@ -47,6 +49,45 @@ public class Array {
             if(array[i] > maxValue)
                 maxValue = array[i];
         return maxValue;
+    }
+
+    private boolean isPresent(int[] array, int item){
+        for(var value : array)
+            if(value == item)
+                return true;
+        return false;
+    }
+
+    public ArrayList<Integer> intersect(int[] other){
+        var commonItems = new ArrayList<Integer>();
+        for(var item : array)
+            if(isPresent(other, item))
+                commonItems.add(item);
+        return commonItems;
+    }
+
+    public ArrayList<Integer> reverse(){
+        var reversed = new ArrayList<Integer>();
+        for(int i = count - 1; i >=0; i--)
+            reversed.add(array[i]);
+        return reversed;
+    }
+
+    public void insertAt(int item, int index){
+        if(index >= count)
+            throw new IllegalStateException("Index position not a part of the original array");
+
+        if(count >= array.length){
+            int[] newArray = new int[array.length * 2];
+            for(int i = 0; i < count; i++)
+                newArray[i] = array[i];
+            array = newArray;
+        }
+
+        for(int i = count - 1; i >= index; i--)
+            array[i + 1] = array[i];
+        array[index] = item;
+        count++;
     }
 
     public void print(){
