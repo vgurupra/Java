@@ -1,4 +1,4 @@
-package com.company.DS.Arrays;
+package com.company.DS.arrays;
 
 import java.util.ArrayList;
 

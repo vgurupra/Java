@@ -1,4 +1,4 @@
-package com.company.DS.Arrays;
+package com.company.DS.arrays;
 
 public class LinkedList {
     private class Node{
