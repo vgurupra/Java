@@ -1,6 +1,8 @@
 package com.company.DS.trees;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 public class BinarySearchTree {
@@ -19,6 +21,9 @@ public class BinarySearchTree {
         }
     }
     private Node root;
+    private int count;
+    private int leaves;
+    private List<Integer> ancestorList = new ArrayList<>();
 
     public Node insert(int value){
         if(root == null){
@@ -179,4 +184,57 @@ public class BinarySearchTree {
             if(temp.right != null)queue.add(temp.right);
         }
     }
+
+    private void sizeImplementation(Node root){
+        if(root == null)return;
+        else count++;
+        sizeImplementation(root.left);
+        sizeImplementation(root.right);
+    }
+
+    public void size(Node root){
+        sizeImplementation(root);
+        System.out.println("The total size: "+count);
+    }
+
+    private void countLeavesImplementation(Node root){
+        if(root == null)return;
+        if(root.left == null && root.right == null)leaves++;
+        countLeavesImplementation(root.left);
+        countLeavesImplementation(root.right);
+    }
+
+    public void countLeaves(Node root){
+        countLeavesImplementation(root);
+        System.out.println("The number of leaf nodes: "+leaves);
+    }
+
+    public void max(Node root){
+        if(root == null)throw new IllegalStateException("Root is null");
+        if(root.right == null){
+            System.out.println("The max value: "+root.value);
+            return;
+        }
+        max(root.right);
+    }
+
+    private int getAncestorImplementation(Node root, int target){
+        if(root != null){
+            if(root.value == target)return 1;
+            int leftSubTree = getAncestorImplementation(root.left, target);
+            int rightSubTree = getAncestorImplementation(root.right, target);
+            if((leftSubTree + rightSubTree) >= 1){
+                ancestorList.add(root.value);
+                return 1;
+            }
+            return 0;
+        }
+        else return 0;
+    }
+
+    public void getAncestorBST(Node root, int target){
+        getAncestorImplementation(root, target);
+        System.out.println("The ancestors of "+target+" : "+ancestorList);
+    }
+    
 }
